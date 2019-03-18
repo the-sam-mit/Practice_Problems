@@ -1,3 +1,5 @@
+//CodeChef Medium
+//Tags- DP, Bit Masking
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long int
