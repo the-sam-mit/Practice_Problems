@@ -1,0 +1,57 @@
+//Uses Dijkstra's Algorithm to find shortest path
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define INF 1000000000
+#define pb(x) push_back(x)
+#define mp(x,y) make_pair(x,y)
+#define in(x) insert(x)
+#define ffor(i,a,b) for(int i=a;i<b;i++)
+#define bfor(i,a,b) for(int i=a;i>=b;i--)
+#define PI 3.14159265358979323846
+#define SP(x) setprecision(x)
+#define M 1000000007
+#define reflex ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define SIZE 300000+5
+vector<pair<int, pair<int,int> > > g[SIZE];
+
+int main(){
+    reflex;
+    int n,m,k,a,b,w;
+    cin>>n>>m>>k;
+    ffor(i,0,m){
+        cin>>a>>b>>w;
+        --a;--b;
+        g[a].pb(mp(b,mp(w,i)));
+        g[b].pb(mp(a,mp(w,i)));
+    }
+    multiset<pair<ll,int>> q;
+    vector<ll> dist(n,1e18);
+    dist[0]=0;
+    q.insert({0,0});
+    vector<int>last(n,-1);//Visited vector in original
+    int cnt=0;
+    vector<int>ans;
+    while(!q.empty() && cnt<k){
+        auto z= *q.begin();
+        q.erase(q.begin());
+        int ver=z.second;
+        if(last[ver]!=-1){
+            cnt++;
+            ans.pb(last[ver]);
+        }//Because of multiset as a priority queue, the edges which the algo traverses is always a shortestpath
+        for(auto y:g[ver]){
+            int to=y.first;
+            int wt=y.second.first;
+            int idx=y.second.second;
+            if(dist[to]>dist[ver]+wt){
+                q.erase(mp(dist[to],to));
+                dist[to]=dist[ver]+wt;
+                last[to]=idx;
+                q.in(mp(dist[to],to));
+            }
+        }
+    }
+    cout<<ans.size()<<endl;
+    for(auto i:ans) cout<<i+1<<" ";
+}  
