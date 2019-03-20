@@ -1,0 +1,55 @@
+//Maths Formula(Series)
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define INF 1000000000
+#define pb(x) push_back(x)
+#define mp(x,y) make_pair(x,y)
+#define in(x) insert(x)
+#define ffor(i,a,b) for(int i=a;i<b;i++)
+#define bfor(i,a,b) for(int i=a;i>=b;i--)
+#define PI 3.14159265358979323846
+#define SP(x) setprecision(x)
+#define M 1000000007
+#define reflex ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define SIZE 300000+5
+
+long long int power(long long int a,long long int b){
+    if(b==0)
+        return 1;
+    if(b==1)
+        return a;
+    if(b%2==0){
+        long long int x=power(a,b/2);
+        return((x*x)%M);
+    }
+    else{
+        long long int x=power(a,b/2);
+        x=(x*x)%M;
+        return((x*a)%M);
+    }
+}
+
+int main(){
+    reflex;
+    int n,q,l,r;
+    string s;
+    cin>>n>>q;
+    cin>>s;
+    ll ones[n+2]={0},zero[n+2]={0};
+    ffor(i,0,n){
+        if(s[i]=='0') zero[i+1]++;
+        else ones[i+1]++;
+    }
+    ffor(i,2,n+1){
+        ones[i]=ones[i-1]+ones[i];
+        zero[i]=zero[i-1]+zero[i];
+    }
+    while(q--){
+        cin>>l>>r;
+        ll az=zero[r]-zero[l-1];
+        ll ao=ones[r]-ones[l-1];
+        ll ans=((power(2,az)%M)*(power(2,ao)-1+M)%M);
+        cout<<ans<<endl;
+    }
+}
