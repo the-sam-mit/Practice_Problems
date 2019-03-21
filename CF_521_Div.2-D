@@ -1,0 +1,40 @@
+//Uses Binary Search 
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define INF 1000000000
+#define pb(x) push_back(x)
+#define mp(x,y) make_pair(x,y)
+#define in(x) insert(x)
+#define ffor(i,a,b) for(int i=a;i<b;i++)
+#define bfor(i,a,b) for(int i=a;i>=b;i--)
+#define PI 3.14159265358979323846
+#define SP(x) setprecision(x)
+#define M 1000000007
+#define reflex ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define SIZE 300000+5
+
+int main(){
+    reflex;
+    int n,k,x=1;
+    cin>>n>>k;
+    int a[n], m[200005]={0};
+    ffor(i,0,n){cin>>a[i];m[a[i]]++;} 
+    int lo=1, hi=200005;
+    while(lo<=hi){
+        int mid=(lo+hi)/2;
+        int cnt=0;
+        ffor(i,0,200005){
+            cnt+=m[i]/mid;
+        }
+        if(cnt>=k){ x=mid;lo=mid+1;}
+        else{
+            hi=mid-1;
+        }
+    }
+    vector<int> v;
+    ffor(i,1,200005){
+        while(m[i]>=x){v.pb(i);m[i]-=x;}
+    }
+     ffor(i,0,k) cout<<v[i]<<" ";
+}
