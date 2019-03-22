@@ -1,0 +1,49 @@
+//Greedy Approach
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define INF 1000000000
+#define pb(x) push_back(x)
+#define mp(x,y) make_pair(x,y)
+#define in(x) insert(x)
+#define ffor(i,a,b) for(int i=a;i<b;i++)
+#define bfor(i,a,b) for(int i=a;i>=b;i--)
+#define PI 3.14159265358979323846
+#define SP(x) setprecision(x)
+#define M 1000000007
+#define reflex ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define SIZE 300000+5
+
+int main(){
+   reflex;
+   int n,k,x,y;
+   cin>>n>>k;
+   vector<pair<int,int>> v;
+   ffor(i,0,n){
+        cin>>x>>y;
+        v.pb(mp(y,x));
+   }
+   sort(v.rbegin(), v.rend());
+   multiset<ll> sx;
+   ll ans=0, sum=0, maxx=0;
+   sum=v[0].second;
+   sx.insert(v[0].second);
+   ans=(v[0].first)*(v[0].second);
+   ffor(i,1,n){
+        if(sx.size()<k){
+            sx.insert(v[i].second);
+            sum+=v[i].second;
+            maxx=v[i].first*sum;
+        }
+        else{
+            sx.insert(v[i].second);
+            auto it= sx.begin();
+            sum+=v[i].second;
+            sx.erase(it);
+            sum-=(*it);
+            maxx=v[i].first*sum;
+        }
+        ans=max(ans, maxx);
+    }
+    cout<<ans<<endl;
+}
