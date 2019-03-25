@@ -16,9 +16,9 @@ using namespace std;
 
 int main(){
    reflex;
-   int n,k,x,y;
+   ll n,k,x,y;
    cin>>n>>k;
-   vector<pair<int,int>> v;
+   vector<pair<ll,ll>> v;
    ffor(i,0,n){
         cin>>x>>y;
         v.pb(mp(y,x));
