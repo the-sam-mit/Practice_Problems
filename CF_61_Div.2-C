@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define ull unsigned long long int
+#define ff first 
+#define ss second
+#define pb(x) push_back(x)
+#define mp(x,y) make_pair(x,y)
+#define in(x) insert(x)
+#define rep(i,a,b)  for (__typeof((b)) i=(a);i<=(b);i++)
+#define nrep(i,a,b)  for (__typeof((b)) i=(b);i>=(a);i--)
+#define ffor(i,a,b) for(int i=a;i<b;i++)
+#define bfor(i,a,b) for(int i=a;i>=b;i--)
+#define PI 3.14159265358979323846
+#define SP(x) setprecision(x)
+#define reflex ios_base::sync_with_stdio(false);cin.tie(NULL)
+#define M 1000000007
+vector<pair<int, int>> v;
+int n,q,l,r;
+int solve(int pos){
+    int nm[n+2]={0},nm2[n+2]={0},nm3[n+2]={0};
+    rep(i,0,q-1){
+        if(pos==i) continue;
+        nm[v[i].ff]++;
+        nm[v[i].ss]--;
+    }
+    int xx=0;
+    rep(i,0,n-1) {
+        xx+=nm[i];
+        nm3[i]=xx;
+    }
+    rep(i,0,n-1){
+        nm2[i+1]=nm2[i]+(nm3[i]==1?1:0);
+    }
+    int ans=INT_MIN;
+    rep(i,0,q-1){
+        if(i==pos) continue;
+        ans=max(ans, nm2[v[i].ff]-nm2[v[i].ss]);
+    }
+    rep(i,0,n-1){
+        if(nm3[i]>0) ans++;
+    }
+    return ans;
+}
+int main(){
+    reflex;
+    
+    cin>>n>>q;
+    rep(i,0,q-1){
+        cin>>l>>r;
+        l--;
+        v.pb(mp(l,r));
+    }
+    int ans=0;
+    rep(j,0,q-1){
+        ans=max(ans,solve(j));
+    }
+    cout<<ans<<endl;
+}
