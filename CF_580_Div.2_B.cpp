@@ -48,22 +48,20 @@ int main(){
 	rep(i,0,n-1){
 		cin>>a[i];
 	}
-	// sort(a,a+n);
-	// ll sum = 0;
-	// rep(i,0,n-1){
-	// 	sum+=(max(0ll,abs(a[i]-1)));
-	// 	if(a[i]==-1) cn++;
-	// }
 	ll ans = 0;
 	rep(i,0,n-1){
 		if(a[i]<0){
 			ans += (abs(a[i]-(-1)));
 			cn++;	
 		}
-		if(a[i]>=0){
+		if(a[i]>0){
 			ans += (abs(a[i]-1));
 		}
+		if(a[i]==0){
+		    ans += (abs(a[i]-1));
+		    cp++;
+		}
 	}
-	if(cn%2==1) ans+=2;
+	if(cn%2==1 && cp==0) ans+=2;
 	cout<<ans<<endl;
 }
