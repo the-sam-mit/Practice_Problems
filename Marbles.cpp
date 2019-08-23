@@ -1,3 +1,4 @@
+//Permutations and combinations 
 //Distribution of identical objects--NCR(n-1,r-1)
 #include<bits/stdc++.h>
 using namespace std;
