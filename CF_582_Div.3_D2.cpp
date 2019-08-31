@@ -68,4 +68,4 @@ int main(){
 		cout<<min(ans,szz)<<endl;
 	// }
 }
- 
+ //Same as D1
