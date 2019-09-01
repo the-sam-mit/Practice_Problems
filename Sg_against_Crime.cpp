@@ -59,7 +59,7 @@ void dfs(int x, int par){
 			low[x] = min(low[x], low[v[x][i].ff]);
 			if(low[v[x][i].ff] > disc[x]) br_check[v[x][i].ss]=1;
 		}
-		else low[x] = min(low[x], low[v[x][i].ff]);
+		else low[x] = min(low[x], disc[v[x][i].ff]);
 	}
 }
 
